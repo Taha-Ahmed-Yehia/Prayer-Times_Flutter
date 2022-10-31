@@ -6,7 +6,6 @@ import 'package:prayer_times/responsive/responsive_layout.dart';
 import 'package:prayer_times/global/theme_data.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import '../manager/application_manager.dart';
-import '../responsive/responsive_layout.dart';
 import '../global/static_methods.dart';
 
 class NextPrayerWidget extends StatefulWidget{

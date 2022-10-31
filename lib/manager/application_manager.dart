@@ -1,5 +1,4 @@
 import 'package:adhan/adhan.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:prayer_times/manager/geo_location_helper.dart';
 import 'package:prayer_times/ui/popup_dialog.dart';

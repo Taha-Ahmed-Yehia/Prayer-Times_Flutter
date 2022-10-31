@@ -1,6 +1,3 @@
-
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:prayer_times/manager/application_manager.dart';
 import '../global/navigator_key.dart';

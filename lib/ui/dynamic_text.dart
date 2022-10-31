@@ -34,14 +34,14 @@ class DynamicSizeText extends StatelessWidget {
         double textScaleFactor = 1;
 
         if (painter.height > constraints.maxHeight) { //
-          print('${painter.size}');
+          //print('${painter.size}');
           painter.textScaleFactor  = minimumFontScale;
           painter.layout(maxWidth: constraints.maxWidth);
-          print('${painter.size}');
+          //print('${painter.size}');
 
           if (painter.height > constraints.maxHeight) { //
             //even minimum does not fit render it with minimum size
-            print("Using minimum set font");
+            //print("Using minimum set font");
             textScaleFactor = minimumFontScale;
           } else if (minimumFontScale < 1) {
             //binary search for valid Scale factor
@@ -59,7 +59,7 @@ class DynamicSizeText extends StatelessWidget {
                 l = mid + 1;
               }
               if  (h <= l) {
-                print('${painter.size}');
+                //print('${painter.size}');
                 textScaleFactor = newScale - 0.01;
                 painter.textScaleFactor  = newScale;
                 painter.layout(maxWidth: constraints.maxWidth);

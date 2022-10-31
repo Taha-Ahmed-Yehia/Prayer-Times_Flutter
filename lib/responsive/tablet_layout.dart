@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:prayer_times/manager/application_manager.dart';
 import 'package:prayer_times/manager/prayer_times_helper.dart';
 import 'package:prayer_times/global/static_methods.dart';
-import 'package:prayer_times/responsive/responsive_layout.dart';
 import 'package:prayer_times/ui/outline_boarder.dart';
 import '../ui/dynamic_text.dart';
 import '../ui/next_prayer_widget.dart';
