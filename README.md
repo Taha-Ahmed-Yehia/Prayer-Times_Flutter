@@ -1,16 +1,6 @@
 # prayer_times
-
-An android program for muslims to show and notfy of all prayers.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+An android program for muslims to show All Prayers Times.
+# To Do
+* Add next prayer notification.
+* Add option to change every prayer notification sound.
+* Add option to mute a certain prayer sound.
