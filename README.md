@@ -8,5 +8,5 @@ After a success access to user location on first time use, the user can use it o
 * Add screenshots.
 * Add next prayer notification.
 * Add option to change every prayer notification sound.
-* Add option to mute a certain prayer sound.
-* Create Unit test.
+* Add option to change notification type for a certain prayer sound.
+* Add Localization.
