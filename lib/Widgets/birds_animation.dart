@@ -1,4 +1,5 @@
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gif/flutter_gif.dart';
 import 'package:prayer_times/Data/app_theme_data.dart';
@@ -22,7 +23,9 @@ class _BirdsAnimationState extends State<BirdsAnimation> with TickerProviderStat
 
   @override
   void initState() {
-    print("Initialized BirdAnimation.");
+    if (kDebugMode) {
+      print("Initialized BirdAnimation.");
+    }
     fetchGif(imageAsset);
     controller1 = FlutterGifController(
       vsync: this,

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 class SizeConfig {
@@ -57,6 +58,8 @@ class SizeConfig {
     blockSmallest = min(blockSizeVertical, blockSizeHorizontal);
     safeBlockSmallest = min(safeBlockVertical, safeBlockHorizontal);
 
-    print("${_mediaQueryData.size}, [${screenWidth}, ${screenHeight}], [${autoScale}]");
+    if (kDebugMode) {
+      print("${_mediaQueryData.size}, [$screenWidth, $screenHeight], [$autoScale]");
+    }
   }
 }

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../Data/app_theme_data.dart';
 import '../Data/size_config.dart';
-import '../Models/AppTheme.dart';
+import '../Models/app_theme.dart';
 import '../Widgets/back_to_prev_screen_button.dart';
 import '../Widgets/color_pick_widget.dart';
 import '../Widgets/custom_text_field.dart';

@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:adhan_dart/adhan_dart.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_native_timezone_updated_gradle/flutter_native_timezone.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
@@ -14,6 +14,7 @@ import 'package:prayer_times/Enums/calculation_method_type.dart';
 import 'package:prayer_times/Extensions/captlize_string.dart';
 
 import '../Models/calculation_method_model.dart';
+import '../Models/prayer_model.dart';
 import '../Models/prayer_times_model.dart';
 import '../manager/geo_location_helper.dart';
 import 'constants.dart';
@@ -25,12 +26,12 @@ class PrayerTimesData extends ChangeNotifier {
 
   late tz.Location timezone;
 
-  late PrayerData fajrTime;
-  late PrayerData sunriseTime;
-  late PrayerData dhuhrTime;
-  late PrayerData asrTime;
-  late PrayerData maghribTime;
-  late PrayerData ishaTime;
+  late PrayerModel fajrTime;
+  late PrayerModel sunriseTime;
+  late PrayerModel dhuhrTime;
+  late PrayerModel asrTime;
+  late PrayerModel maghribTime;
+  late PrayerModel ishaTime;
 
   bool isLoaded = false;
 
@@ -52,7 +53,9 @@ class PrayerTimesData extends ChangeNotifier {
   void gpsLoad() async {
     var positonError = false;
     prayerTimesModel.position = await determinePosition(showServiceUnenabledMessage: !isLoaded).onError((error, stackTrace) {
-      print(stackTrace);
+      if (kDebugMode) {
+        print(stackTrace);
+      }
       positonError = true;
       return Position(longitude: 0, latitude: 0, timestamp: DateTime.now(), accuracy: 0, altitude: 0, heading: 0, speed: 0, speedAccuracy: 0);
     }).timeout(const Duration(seconds: 60), onTimeout: () {
@@ -94,18 +97,18 @@ class PrayerTimesData extends ChangeNotifier {
   }
 
   void initPrayers(){
-    fajrTime = PrayerData("Fajr", tz.TZDateTime.from(prayerTimes.fajr??initDate, timezone).add(Duration(minutes: prayerTimesModel.fajrTimeAdjustment)));
-    sunriseTime = PrayerData("Alshuruq",tz.TZDateTime.from(prayerTimes.sunrise??initDate, timezone).add(Duration(minutes: prayerTimesModel.sunriseTimeAdjustment)));
-    dhuhrTime = PrayerData(
+    fajrTime = PrayerModel("Fajr", tz.TZDateTime.from(prayerTimes.fajr??initDate, timezone).add(Duration(minutes: prayerTimesModel.fajrTimeAdjustment)));
+    sunriseTime = PrayerModel("Alshuruq",tz.TZDateTime.from(prayerTimes.sunrise??initDate, timezone).add(Duration(minutes: prayerTimesModel.sunriseTimeAdjustment)));
+    dhuhrTime = PrayerModel(
       DateFormat(DateFormat.ABBR_WEEKDAY).format(initDate) == "Fri"? "Aljameah" : "Dhuhr", 
       tz.TZDateTime.from(prayerTimes.dhuhr??initDate, timezone).add(Duration(minutes: prayerTimesModel.dhuhrTimeAdjustment))
     );
-    asrTime = PrayerData("Asr",tz.TZDateTime.from(prayerTimes.asr??initDate, timezone).add(Duration(minutes: prayerTimesModel.asrTimeAdjustment)));
-    maghribTime = PrayerData("Maghrib",tz.TZDateTime.from(prayerTimes.maghrib??initDate, timezone).add(Duration(minutes: prayerTimesModel.maghribTimeAdjustment)));
-    ishaTime = PrayerData("Isha",tz.TZDateTime.from(prayerTimes.isha??initDate, timezone).add(Duration(minutes: prayerTimesModel.ishaTimeAdjustment)));
+    asrTime = PrayerModel("Asr",tz.TZDateTime.from(prayerTimes.asr??initDate, timezone).add(Duration(minutes: prayerTimesModel.asrTimeAdjustment)));
+    maghribTime = PrayerModel("Maghrib",tz.TZDateTime.from(prayerTimes.maghrib??initDate, timezone).add(Duration(minutes: prayerTimesModel.maghribTimeAdjustment)));
+    ishaTime = PrayerModel("Isha",tz.TZDateTime.from(prayerTimes.isha??initDate, timezone).add(Duration(minutes: prayerTimesModel.ishaTimeAdjustment)));
   }
 
-  PrayerData getCurrentPrayer(){
+  PrayerModel getCurrentPrayer(){
     var date = tz.TZDateTime.from(DateTime.now(), timezone);
     String prayerName = prayerTimes.currentPrayer(date: date);
     var prayerTime =  tz.TZDateTime.from(prayerTimes.timeForPrayer(prayerName)??initDate, timezone);
@@ -113,10 +116,10 @@ class PrayerTimesData extends ChangeNotifier {
       prayerName = "Aljameah";
     }
     prayerName = prayerName.capitalize();
-    return PrayerData(prayerName, prayerTime);
+    return PrayerModel(prayerName, prayerTime);
   }
 
-  PrayerData getNextPrayer(){
+  PrayerModel getNextPrayer(){
     var date = tz.TZDateTime.from(DateTime.now(), timezone);
     String prayerName = prayerTimes.nextPrayer(date: date);
     var prayerTime =  tz.TZDateTime.from(prayerTimes.timeForPrayer(prayerName)??initDate, timezone);
@@ -129,7 +132,7 @@ class PrayerTimesData extends ChangeNotifier {
       prayerName = "Aljameah";
     }
     prayerName = prayerName.capitalize();
-    return PrayerData(prayerName, prayerTime);
+    return PrayerModel(prayerName, prayerTime);
   }
   
   void load() async {
@@ -145,7 +148,9 @@ class PrayerTimesData extends ChangeNotifier {
           notifyListeners();
         } catch(e) {
           gpsLoad();
-          print(e);
+          if (kDebugMode) {
+            print(e);
+          }
         }
       }
     }
@@ -204,11 +209,4 @@ class PrayerTimesData extends ChangeNotifier {
     update();
     save();
   }
-}
-
-class PrayerData {
-  final String prayerName;
-  final DateTime prayerTime;
-  
-  PrayerData(this.prayerName, this.prayerTime);
 }

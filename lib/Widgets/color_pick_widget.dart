@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../Data/app_theme_data.dart';
 import '../Data/size_config.dart';
-import '../Models/AppTheme.dart';
+import '../Models/app_theme.dart';
 import 'custom_color_picker_text_input.dart';
 
 class ColorPick extends StatefulWidget {

@@ -32,15 +32,16 @@ class NotificationAPI{
             importance: Importance.max,
             priority: Priority.max,
             icon: "app_icon",
-            sound: RawResourceAndroidNotificationSound('adhan'),
+            sound: const RawResourceAndroidNotificationSound('adhan'),
             playSound: true,
-            enableLights: true
+            enableLights: false
           ),
-          iOS: DarwinNotificationDetails()
+          iOS: const DarwinNotificationDetails()
         ),
         uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime
     );
   }
+
   static _notificationDetail() async {
     return const NotificationDetails(
       android: AndroidNotificationDetails("channelId", "channelName", importance: Importance.max),

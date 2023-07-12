@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../Data/app_theme_data.dart';
 import '../Data/size_config.dart';
-import '../Models/AppTheme.dart';
+import '../Models/app_theme.dart';
 
 class MenuButton extends StatefulWidget {
   final Function? onSelect;
@@ -67,7 +67,7 @@ class _MenuButtonState extends State<MenuButton> {
           ),
         )
     );
-    overlay!.insert(entry!);
+    overlay.insert(entry!);
   }
 
   Widget buildOverly(SizeConfig sizeConfig, AppThemeData appThemeData) {
@@ -96,7 +96,7 @@ class _MenuButtonState extends State<MenuButton> {
       ),
       onPressed: (){
         widget.onSelect?.call();
-        item.onSelect?.call();
+        item.onSelect.call();
 
         entry?.remove();
         setState(() {
@@ -117,7 +117,7 @@ class _MenuButtonState extends State<MenuButton> {
             setState(() {
               _isDropDown = !_isDropDown;
               if(_isDropDown){
-                WidgetsBinding.instance!.addPostFrameCallback((_)=> showOverlay(context, sizeConfig));
+                WidgetsBinding.instance.addPostFrameCallback((_)=> showOverlay(context, sizeConfig));
               }else{
                 entry?.remove();
               }

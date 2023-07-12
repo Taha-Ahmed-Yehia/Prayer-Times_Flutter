@@ -8,7 +8,7 @@ import 'package:prayer_times/Data/PrayerTimesData.dart';
 import 'package:prayer_times/Data/size_config.dart';
 import 'package:prayer_times/Enums/calculation_method_type.dart';
 import 'package:prayer_times/Extensions/captlize_string.dart';
-import 'package:prayer_times/Extensions/enum_toString.dart';
+import 'package:prayer_times/Extensions/enum_to_string.dart';
 import 'package:prayer_times/Widgets/back_to_prev_screen_button.dart';
 import 'package:prayer_times/Widgets/custom_drop_down.dart';
 import 'package:provider/provider.dart';

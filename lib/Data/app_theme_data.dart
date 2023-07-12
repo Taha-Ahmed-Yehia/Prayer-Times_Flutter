@@ -1,12 +1,13 @@
 
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:prayer_times/Data/constants.dart';
 import 'package:prayer_times/Extensions/hex_color_extension.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../Models/AppTheme.dart';
+import '../Models/app_theme.dart';
 
 class AppThemeData extends ChangeNotifier{
   List<AppTheme> themes = [
@@ -105,7 +106,9 @@ class AppThemeData extends ChangeNotifier{
             selectedTheme = themes[themeJson.selectedThemeID];
           }
         }catch(e){
-          print(e);
+          if (kDebugMode) {
+            print(e);
+          }
         }
       }
     }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../Data/size_config.dart';
-import '../Models/AppTheme.dart';
+import '../Models/app_theme.dart';
 
 // ignore: must_be_immutable
 class CustomColorPickTextField extends StatelessWidget {

@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:prayer_times/Data/app_theme_data.dart';
 import 'package:prayer_times/Data/size_config.dart';
-import 'package:prayer_times/Models/AppTheme.dart';
+import 'package:prayer_times/Models/app_theme.dart';
 import 'package:prayer_times/Screens/settings_screen.dart';
 import 'package:prayer_times/Screens/theme_picker_screen.dart';
 import 'package:prayer_times/Widgets/birds_animation.dart';
@@ -107,9 +108,11 @@ class MobileLayout extends StatelessWidget {
     return Consumer<PrayerTimesData>(
       builder: (context, prayerTimesData, child) { 
         bool isPrayerDataLoaded = prayerTimesData.isLoaded;
-        print("Prayer Initialized: $isPrayerDataLoaded");
+        if (kDebugMode) {
+          print("Prayer Initialized: $isPrayerDataLoaded");
+        }
         if(!isPrayerDataLoaded) {
-          return SizedBox();
+          return const SizedBox();
         }
         return Expanded(
           child: Column(

@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../Data/size_config.dart';
 import '../Data/app_theme_data.dart';
-import '../Models/AppTheme.dart';
+import '../Models/app_theme.dart';
 import '../Widgets/back_to_prev_screen_button.dart';
 
 import 'create_or_edit_theme_screen.dart';
