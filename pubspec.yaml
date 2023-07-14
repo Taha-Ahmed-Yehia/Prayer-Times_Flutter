@@ -1,6 +1,5 @@
 name: prayer_times
 description: A program to show and notify of all prayers for muslims.
-
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -12,13 +11,15 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # build by specifying --build-name and --build-number, respectively.
 # In Android, build-name is used as versionName while build-number used as versionCode.
 # Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
 version: 1.5.0+1
 
 environment:
-  sdk: ">=2.17.6 <3.0.0"
+  sdk: '>=2.19.6 <3.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -29,11 +30,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  cupertino_icons: ^1.0.2
-  geolocator: ^7.0.0
+    
+  cupertino_icons: ^1.0.5
+  geolocator: ^9.0.2
   percent_indicator: ^4.0.1
-  shared_preferences: ^2.0.15
+  shared_preferences: ^2.2.0
 
   # New dependencies
   adhan_dart: ^1.0.8
@@ -47,13 +48,12 @@ dependencies:
   timezone: ^0.9.2
   flutter_native_timezone_updated_gradle: ^2.0.3
   flutter_gif: ^0.0.4
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-  flutter_launcher_icons: ^0.10.0
-
+  flutter_launcher_icons: ^0.13.1
 
 flutter:
   uses-material-design: true
