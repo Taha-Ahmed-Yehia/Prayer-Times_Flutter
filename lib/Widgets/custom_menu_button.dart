@@ -58,7 +58,7 @@ class _MenuButtonState extends State<MenuButton> {
                 },
               ),
               Positioned(
-                  left: offset.dx - (size.width + widget.iconSize * .5) - widget.menuWidth * .5 ,
+                  left: offset.dx - (size.width + (widget.iconSize * .5)) - widget.menuWidth * .5 ,
                   top: offset.dy + size.height,
                   width: widget.menuWidth,
                   child: buildOverly(sizeConfig, appThemeData)

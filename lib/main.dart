@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:prayer_times/Data/app_theme_data.dart';
-import 'package:prayer_times/Data/notification_api.dart';
+// import 'package:prayer_times/Data/notification_api.dart';
 import 'package:prayer_times/Data/PrayerTimesData.dart';
 import 'package:prayer_times/Data/constants.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +28,7 @@ void main() {
 
   tz.initializeTimeZones();
 
-  NotificationAPI.initNotification();
+  //NotificationAPI.initNotification();
 
   runApp(
       DevicePreview(
@@ -53,6 +53,8 @@ class MyApp extends StatelessWidget {
             title: appTitle,
             navigatorKey: mainNavigatorKey,
             useInheritedMediaQuery: true,
+            locale: DevicePreview.locale(context),
+            builder: DevicePreview.appBuilder,
             home: const Scaffold(
                 resizeToAvoidBottomInset: false,
                 body: ResponsiveLayout(tablet: TabletLayout(), mobile:  MobileLayout())

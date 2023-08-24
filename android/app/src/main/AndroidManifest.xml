@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.prayer_times">
+    package="com.BlackFox4Apps.prayer_times">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
    <application
-        android:label="prayer_times"
+        android:label="Prayer Times"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
