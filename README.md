@@ -1,12 +1,16 @@
-# Prayer Times
-A Flutter program for muslims to show All Prayers Times (Tested on Android, Windows and Web).  
-The application require access to user location the first time to be able to calculate and show prayers and
-abilty to save on local storage.
-After a success access to user location on first time use, the user can use it offline without need to access location.
+# prayer_times_new
 
-# To Do
-* Add screenshots.
-* Add next prayer notification.
-* Add option to change every prayer notification sound.
-* Add option to change notification type for a certain prayer sound.
-* Add Localization.
+A new Flutter project.
+
+## Getting Started
+
+This project is a starting point for a Flutter application.
+
+A few resources to get you started if this is your first Flutter project:
+
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.

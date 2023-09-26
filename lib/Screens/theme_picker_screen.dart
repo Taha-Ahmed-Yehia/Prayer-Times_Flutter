@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_polygon/flutter_polygon.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:prayer_times/Screens/show_dialog_window.dart';
+import '../Screens/show_dialog_window.dart';
 import 'package:provider/provider.dart';
 
 import '../Data/size_config.dart';
 import '../Data/app_theme_data.dart';
 import '../Models/app_theme.dart';
-import '../Widgets/back_to_prev_screen_button.dart';
+import '../Widgets/General/back_to_prev_screen_button.dart';
 
 import 'create_or_edit_theme_screen.dart';
 
@@ -16,7 +16,7 @@ class ThemePickerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var sizeConfig = SizeConfig(context);
+    var sizeConfig = SizeConfig.instanse;
 
     return ChangeNotifierProvider(
       create: (context) => EditThemes(),

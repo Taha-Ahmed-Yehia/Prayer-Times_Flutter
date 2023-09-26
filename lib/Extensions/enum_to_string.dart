@@ -1,5 +1,5 @@
 
-import 'package:prayer_times/Extensions/captlize_string.dart';
+import '../Extensions/captlize_string.dart';
 
 extension EnumToName on String {
   enumNameToString({String splitPattern = '_'}){

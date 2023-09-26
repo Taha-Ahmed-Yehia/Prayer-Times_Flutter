@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import '../Data/app_theme_data.dart';
 import '../Data/size_config.dart';
 import '../Models/app_theme.dart';
-import '../Widgets/back_to_prev_screen_button.dart';
-import '../Widgets/color_pick_widget.dart';
-import '../Widgets/custom_text_field.dart';
+import '../Widgets/General/back_to_prev_screen_button.dart';
+import '../Widgets/Specific/Color Picker/color_pick_widget.dart';
+import '../Widgets/General/custom_text_field.dart';
 
 // ignore: must_be_immutable
 class CreateOrEditTheme extends StatelessWidget {
@@ -23,7 +23,7 @@ class CreateOrEditTheme extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var sizeConfig = SizeConfig(context);
+    var sizeConfig = SizeConfig.instanse;
     return Consumer<AppThemeData>(
         builder: (context, appThemeData, child){
           return SafeArea(

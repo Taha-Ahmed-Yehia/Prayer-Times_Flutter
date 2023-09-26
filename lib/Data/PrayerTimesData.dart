@@ -4,18 +4,18 @@ import 'dart:convert';
 
 import 'package:adhan_dart/adhan_dart.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_native_timezone_updated_gradle/flutter_native_timezone.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/timezone.dart' as tz;
 
-import 'package:prayer_times/Enums/calculation_method_type.dart';
-import 'package:prayer_times/Extensions/captlize_string.dart';
+import '../Enums/calculation_method_type.dart';
+import '../Extensions/captlize_string.dart';
 
 import '../Models/calculation_method_model.dart';
 import '../Models/prayer_model.dart';
 import '../Models/prayer_times_model.dart';
+import '../Screens/show_dialog_window.dart';
 import '../manager/geo_location_helper.dart';
 import 'constants.dart';
 
@@ -37,7 +37,7 @@ class PrayerTimesData extends ChangeNotifier {
 
   PrayerTimesData() {
     prayerTimesModel = PrayerTimesModel(
-      position: Position(longitude: 0, latitude: 0, timestamp: DateTime.now(), accuracy: 0, altitude: 0, heading: 0, speed: 0, speedAccuracy: 0), 
+      position: null, 
       calculationMethodData: CalculationMethodModel(calculationMethodType: CalculationMethodType.muslim_World_League),
       madhab: Madhab.Hanafi,
       fajrTimeAdjustment: 0, 
@@ -50,24 +50,72 @@ class PrayerTimesData extends ChangeNotifier {
     prayerTimesModel.calculationMethodData.calculationParameters.madhab = Madhab.Hanafi;
     load();
   }
-  void gpsLoad() async {
-    var positonError = false;
-    prayerTimesModel.position = await determinePosition(showServiceUnenabledMessage: !isLoaded).onError((error, stackTrace) {
-      if (kDebugMode) {
-        print(stackTrace);
+  
+  void load() async {
+    var sharedPreferences = await SharedPreferences.getInstance();
+    String data = sharedPreferences.getString(prayerTimesDataSaveKey) as String;
+    if (kDebugMode) {
+      print(data);
+    }
+    if(data.isNotEmpty){
+      try{
+        prayerTimesModel = PrayerTimesModel.fromJson(jsonDecode(data));
+        if(prayerTimesModel.position != null){
+          String dtz = await FlutterTimezone.getLocalTimezone();
+          timezone = tz.getLocation(dtz);
+          initDate = tz.TZDateTime.from(DateTime.now(), timezone);
+          var coordinates = Coordinates(prayerTimesModel.position?.latitude, prayerTimesModel.position?.longitude);
+          prayerTimes = PrayerTimes(coordinates, initDate, prayerTimesModel.calculationMethodData.calculationParameters);
+
+          initPrayers();
+          
+          isLoaded = true;
+          notifyListeners();
+          if (kDebugMode) {
+            print(prayerTimesModel.position);
+          }
+        }
+        gpsLoad(false);
+      } catch(e) {
+        isLoaded = false;
+        if (kDebugMode) {
+          print(e);
+        }
+        gpsLoad(true);
       }
+    }else{
+      gpsLoad(true);
+    }
+  }
+  
+  void save() async{
+    var sharedPreferences = await SharedPreferences.getInstance();
+    var data = prayerTimesModel;
+    var pref = jsonEncode(data);
+    sharedPreferences.setString(prayerTimesDataSaveKey, pref);
+  }
+
+  void gpsLoad(bool showServiceUnenabledMessage) async {
+    var positonError = false;
+    prayerTimesModel.position = await determinePosition(
+      showServiceUnenabledMessage: showServiceUnenabledMessage).onError((error, stackTrace) {
+        positonError = true;
+        if (kDebugMode) {
+          print(stackTrace);
+        }
+        return null;
+      }
+    ).timeout(const Duration(seconds: 120), onTimeout: () {
       positonError = true;
-      return Position(longitude: 0, latitude: 0, timestamp: DateTime.now(), accuracy: 0, altitude: 0, heading: 0, speed: 0, speedAccuracy: 0);
-    }).timeout(const Duration(seconds: 60), onTimeout: () {
-      positonError = true;
-      return Position(longitude: 0, latitude: 0, timestamp: DateTime.now(), accuracy: 0, altitude: 0, heading: 0, speed: 0, speedAccuracy: 0);
+      showCustomDialog("Opps", "Your Location service took to long to get your location\nPlease press on reload button from menu button to try again.\nNote: if it happen again please restart the application or your mobile.",);
+      return null;
     },);
 
     if(!positonError){
-      String dtz = await FlutterNativeTimezone.getLocalTimezone();
+      String dtz = await FlutterTimezone.getLocalTimezone();
       timezone = tz.getLocation(dtz);
       initDate = tz.TZDateTime.from(DateTime.now(), timezone);
-      var coordinates = Coordinates(prayerTimesModel.position.latitude, prayerTimesModel.position.longitude);
+      var coordinates = Coordinates(prayerTimesModel.position?.latitude, prayerTimesModel.position?.longitude);
       prayerTimes = PrayerTimes(coordinates, initDate, prayerTimesModel.calculationMethodData.calculationParameters);
 
       initPrayers();
@@ -83,16 +131,13 @@ class PrayerTimesData extends ChangeNotifier {
   }
 
   void update() async {
-    String dtz = await FlutterNativeTimezone.getLocalTimezone();
+    String dtz = await FlutterTimezone.getLocalTimezone();
     timezone = tz.getLocation(dtz);
     initDate = tz.TZDateTime.from(DateTime.now(), timezone);
-
-    var coordinates = Coordinates(prayerTimesModel.position.latitude, prayerTimesModel.position.longitude);
-
+    var coordinates = Coordinates(prayerTimesModel.position?.latitude, prayerTimesModel.position?.longitude);
     prayerTimes = PrayerTimes(coordinates, initDate, prayerTimesModel.calculationMethodData.calculationParameters);
 
     initPrayers();
-    
     notifyListeners();
   }
 
@@ -133,35 +178,6 @@ class PrayerTimesData extends ChangeNotifier {
     }
     prayerName = prayerName.capitalize();
     return PrayerModel(prayerName, prayerTime);
-  }
-  
-  void load() async {
-    var sharedPreferences = await SharedPreferences.getInstance();
-    var data = sharedPreferences.getString(prayerTimesDataSaveKey);
-    //print(data);
-    if(data != null){
-      if(data.isNotEmpty){
-        try{
-          prayerTimesModel = PrayerTimesModel.fromJson(jsonDecode(data));
-          update();
-          isLoaded = true;
-          notifyListeners();
-        } catch(e) {
-          gpsLoad();
-          if (kDebugMode) {
-            print(e);
-          }
-        }
-      }
-    }
-    gpsLoad();
-  }
-  
-  void save() async{
-    var sharedPreferences = await SharedPreferences.getInstance();
-    var data = prayerTimesModel;
-    var pref = jsonEncode(data);
-    sharedPreferences.setString(prayerTimesDataSaveKey, pref);
   }
 
   void setCalculationMethodData(CalculationMethodType calculationMethodType){

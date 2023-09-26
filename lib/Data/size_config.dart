@@ -4,6 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 class SizeConfig {
+
+  static late SizeConfig instanse;
+
   late MediaQueryData _mediaQueryData;
   late EdgeInsets safeAreaBounds;
   late double screenWidth;
@@ -26,6 +29,8 @@ class SizeConfig {
 
   late Size screenSizeRef;
   SizeConfig(BuildContext context, {Size screenSizeReference = const Size(640, 360)}) {
+    instanse = this;
+    
     _mediaQueryData = MediaQuery.of(context);
 
     if(_mediaQueryData.orientation == Orientation.portrait){

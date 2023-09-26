@@ -4,7 +4,7 @@ import 'package:geolocator/geolocator.dart';
 import 'calculation_method_model.dart';
 
 class PrayerTimesModel {
-  Position position;
+  Position? position;
   CalculationMethodModel calculationMethodData;
   String madhab;
 
@@ -28,7 +28,7 @@ class PrayerTimesModel {
   });
   Map<String, dynamic> toMap() {
     return {
-      'position': position.toJson(),
+      'position': position?.toJson(),
       'calculationMethodData': calculationMethodData.toMap(),
       'madhab': madhab,
       'fajrTimeAdjustment': fajrTimeAdjustment,

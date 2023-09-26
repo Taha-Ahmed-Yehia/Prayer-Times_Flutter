@@ -1,8 +1,8 @@
 
 import 'package:geolocator/geolocator.dart';
-import 'package:prayer_times/Screens/show_dialog_window.dart';
+import '../Screens/show_dialog_window.dart';
 
-Future<Position> determinePosition({bool showServiceUnenabledMessage = true}) async {
+Future<Position?> determinePosition({bool showServiceUnenabledMessage = true}) async {
   bool serviceEnabled;
   LocationPermission permission;
 

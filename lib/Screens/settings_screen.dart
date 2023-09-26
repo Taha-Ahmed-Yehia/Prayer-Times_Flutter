@@ -3,14 +3,14 @@
 
 import 'package:adhan_dart/adhan_dart.dart';
 import 'package:flutter/material.dart';
-import 'package:prayer_times/Data/app_theme_data.dart';
-import 'package:prayer_times/Data/PrayerTimesData.dart';
-import 'package:prayer_times/Data/size_config.dart';
-import 'package:prayer_times/Enums/calculation_method_type.dart';
-import 'package:prayer_times/Extensions/captlize_string.dart';
-import 'package:prayer_times/Extensions/enum_to_string.dart';
-import 'package:prayer_times/Widgets/back_to_prev_screen_button.dart';
-import 'package:prayer_times/Widgets/custom_drop_down.dart';
+import '/Data/app_theme_data.dart';
+import '../Data/PrayerTimesData.dart';
+import '../Data/size_config.dart';
+import '../Enums/calculation_method_type.dart';
+import '../Extensions/captlize_string.dart';
+import '../Extensions/enum_to_string.dart';
+import '../Widgets/General/back_to_prev_screen_button.dart';
+import '/Widgets/General/custom_drop_down.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -20,7 +20,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig sizeConfig = SizeConfig(context);
+    SizeConfig sizeConfig = SizeConfig.instanse;
 
     return Consumer2<AppThemeData, PrayerTimesData>(
       builder: (context, appThemeData, prayerTimesData, child) {

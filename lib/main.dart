@@ -1,15 +1,15 @@
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:prayer_times/Data/app_theme_data.dart';
-// import 'package:prayer_times/Data/notification_api.dart';
-import 'package:prayer_times/Data/PrayerTimesData.dart';
-import 'package:prayer_times/Data/constants.dart';
+import '../Data/app_theme_data.dart';
+// import '../Data/notification_api.dart';
+import '../Data/PrayerTimesData.dart';
+import '../Data/constants.dart';
 import 'package:provider/provider.dart';
 import 'Screens/responsive/mobile_layout.dart';
 import 'Screens/responsive/responsive_layout.dart';
 import 'Screens/responsive/tablet_layout.dart';
-import 'package:device_preview/device_preview.dart';
+// import 'package:device_preview/device_preview.dart';
 import 'package:timezone/data/latest.dart' as tz;
 
 void main() {
@@ -29,14 +29,15 @@ void main() {
   tz.initializeTimeZones();
 
   //NotificationAPI.initNotification();
-
-  runApp(
-      DevicePreview(
-        enabled: kDebugMode,
-        isToolbarVisible: true,
-        builder: (context) => const MyApp(),
-      )
-  );
+  runApp(const MyApp());
+  // runApp(
+  //   kDebugMode ? 
+  //   DevicePreview(
+  //     isToolbarVisible: true,
+  //     builder: (context) => const MyApp(),
+  //   ) :
+  //   const MyApp()
+  // );
 }
 
 class MyApp extends StatelessWidget {
@@ -52,12 +53,11 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: appTitle,
             navigatorKey: mainNavigatorKey,
-            useInheritedMediaQuery: true,
-            locale: DevicePreview.locale(context),
-            builder: DevicePreview.appBuilder,
+            // locale: DevicePreview.locale(context),
+            // builder: DevicePreview.appBuilder,
             home: const Scaffold(
-                resizeToAvoidBottomInset: false,
-                body: ResponsiveLayout(tablet: TabletLayout(), mobile:  MobileLayout())
+              resizeToAvoidBottomInset: false,
+              body: ResponsiveLayout(tablet: TabletLayout(), mobile:  MobileLayout())
             )
         ),
       ),

@@ -1,6 +1,6 @@
 {
-    "name": "prayer_times",
-    "short_name": "prayer_times",
+    "name": "prayer_times_new",
+    "short_name": "prayer_times_new",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

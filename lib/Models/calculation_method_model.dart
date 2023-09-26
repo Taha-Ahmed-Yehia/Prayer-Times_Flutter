@@ -1,7 +1,7 @@
 
 import 'dart:convert';
 import 'package:adhan_dart/adhan_dart.dart';
-import 'package:prayer_times/Extensions/enum_to_string.dart';
+import '../Extensions/enum_to_string.dart';
 import '../Enums/calculation_method_type.dart';
 
 class CalculationMethodModel {

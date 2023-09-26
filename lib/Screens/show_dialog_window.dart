@@ -1,13 +1,13 @@
 
 import 'package:flutter/material.dart';
-import 'package:prayer_times/Data/app_theme_data.dart';
-import 'package:prayer_times/Data/constants.dart';
-import 'package:prayer_times/Data/size_config.dart';
+import '../Data/app_theme_data.dart';
+import '../Data/constants.dart';
+import '../Data/size_config.dart';
 import 'package:provider/provider.dart';
 
 void showCustomDialog(String title, String message){
   var context = mainNavigatorKey.currentContext!;
-  var blockSmallest = SizeConfig(context).blockSmallest;
+  var blockSmallest = SizeConfig.instanse.blockSmallest;
   showDialog(context: context,
       builder: (context) => Consumer<AppThemeData>(
         builder: (context, appThemeData, child) => AlertDialog(

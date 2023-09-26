@@ -1,28 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:prayer_times/Data/app_theme_data.dart';
-import 'package:prayer_times/Data/size_config.dart';
-import 'package:prayer_times/Models/app_theme.dart';
-import 'package:prayer_times/Screens/settings_screen.dart';
-import 'package:prayer_times/Screens/theme_picker_screen.dart';
-import 'package:prayer_times/Widgets/birds_animation.dart';
-import 'package:prayer_times/Widgets/prayer_tile_widget.dart';
+import '/Data/app_theme_data.dart';
+import '/Data/size_config.dart';
+import '/Models/app_theme.dart';
+import '/Widgets/Animations/birds_animation.dart';
+import '/Widgets/Specific/Menu/menu_button.dart';
+import '/Widgets/Specific/Prayer%20Widget/prayer_tile_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../../Data/PrayerTimesData.dart';
-import '../../Widgets/custom_menu_button.dart';
-import '../../Widgets/next_prayer_widget.dart';
-import '../../Widgets/time_widget.dart';
+import '../../Widgets/Specific/Prayer Widget/next_prayer_widget.dart';
+import '../../Widgets/General/time_widget.dart';
 
 class MobileLayout extends StatelessWidget {
   const MobileLayout({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig sizeConfig = SizeConfig(context);
+    var sizeConfig = SizeConfig(context);
     return Consumer<AppThemeData>(
       builder: (context, appThemeData, child) => Scaffold(
           resizeToAvoidBottomInset: false,
@@ -41,14 +38,16 @@ class MobileLayout extends StatelessWidget {
       ),
     );
   }
+
   Widget topPanel(SizeConfig sizeConfig, AppTheme theme, BuildContext context) {
     final width = sizeConfig.screenWidth;
     final height = (sizeConfig.screenHeight * .4);
     final preyerTimesData = Provider.of<PrayerTimesData>(context,listen: false);
+
     return Container(
       width: width,
       height: height,
-      padding: EdgeInsetsDirectional.only(top: sizeConfig.safeAreaBounds.top),
+      padding: EdgeInsetsDirectional.only(top: sizeConfig.safeAreaBounds.top > 0 ? sizeConfig.safeAreaBounds.top : sizeConfig.blockSmallest * 10),
       decoration: BoxDecoration(
         color: theme.primaryDarkColor,
         borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(25),bottomRight: Radius.circular(25)),
@@ -67,33 +66,13 @@ class MobileLayout extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TimeWidget(),
+              TimeWidget(sizeConfig: sizeConfig,),
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    width: sizeConfig.screenWidth * .5,
-                    child: Align(
-                      alignment: AlignmentDirectional.centerEnd,
-                      child: MenuButton(
-                        [
-                          MenuItem("Reload", (){
-                            preyerTimesData.reload();
-                          }),
-                          MenuItem("Settings", (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsScreen(),));
-                          }),
-                          MenuItem("Themes", (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => const ThemePickerScreen(),));
-                          }),
-                        ], 
-                        iconSize: 18,
-                        icon: FontAwesomeIcons.bars,
-                      )
-                    ),
-                  ),
-                  const NextPrayerWidget(),
+                  MenuButtonWidget(preyerTimesData: preyerTimesData, sizeConfig: sizeConfig),
+                  NextPrayerWidget(sizeConfig: sizeConfig,),
                   const SizedBox()
                 ],
               )
@@ -119,7 +98,11 @@ class MobileLayout extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              PrayerTile(prayerIcon: CupertinoIcons.sun_dust, prayerName: isPrayerDataLoaded?prayerTimesData.fajrTime.prayerName:"", prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.fajrTime.prayerTime):""),
+              PrayerTile(
+                prayerIcon: CupertinoIcons.sun_dust, 
+                prayerName: isPrayerDataLoaded?prayerTimesData.fajrTime.prayerName:"",
+                prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.fajrTime.prayerTime):""
+              ),
               PrayerTile(prayerIcon: CupertinoIcons.sunrise,prayerName: isPrayerDataLoaded?prayerTimesData.sunriseTime.prayerName:"", prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.sunriseTime.prayerTime):""),
               PrayerTile(prayerIcon: CupertinoIcons.sun_max, prayerName: isPrayerDataLoaded?prayerTimesData.dhuhrTime.prayerName:"", prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.dhuhrTime.prayerTime):""),
               PrayerTile(prayerIcon: CupertinoIcons.sun_haze, prayerName: isPrayerDataLoaded?prayerTimesData.asrTime.prayerName:"", prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.asrTime.prayerTime):""),

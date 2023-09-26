@@ -3,8 +3,8 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:prayer_times/Data/constants.dart';
-import 'package:prayer_times/Extensions/hex_color_extension.dart';
+import '../Data/constants.dart';
+import '../Extensions/hex_color_extension.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Models/app_theme.dart';
