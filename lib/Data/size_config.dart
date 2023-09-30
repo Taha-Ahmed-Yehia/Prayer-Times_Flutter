@@ -28,6 +28,9 @@ class SizeConfig {
   late Size safeAutoScale;
 
   late Size screenSizeRef;
+
+  late double textScaleFactor;
+
   SizeConfig(BuildContext context, {Size screenSizeReference = const Size(640, 360)}) {
     instanse = this;
     
@@ -63,8 +66,11 @@ class SizeConfig {
     blockSmallest = min(blockSizeVertical, blockSizeHorizontal);
     safeBlockSmallest = min(safeBlockVertical, safeBlockHorizontal);
 
+    textScaleFactor = blockSmallest / _mediaQueryData.textScaleFactor;
+    
     if (kDebugMode) {
       print("${_mediaQueryData.size}, [$screenWidth, $screenHeight], [$autoScale]");
     }
   }
+
 }

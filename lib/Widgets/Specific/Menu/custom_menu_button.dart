@@ -15,7 +15,19 @@ class MenuButton extends StatefulWidget {
   final IconData icon;
 
   final double menuWidth;
-  const MenuButton(this.menuItems, {this.menuWidth = 100, this.icon = FontAwesomeIcons.gear,this.iconSize = 20, this.onSelect, this.selectedItemID = 0,Key? key}) : super(key: key);
+  final Size minmumSize;
+
+  const MenuButton(
+    this.menuItems, {
+      this.menuWidth = 100, 
+      this.icon = FontAwesomeIcons.gear,
+      this.iconSize = 20, 
+      this.onSelect,
+      this.selectedItemID = 0,
+      this.minmumSize = const Size(0, 0),
+      Key? key
+    }
+  ) : super(key: key);
 
   @override
   State<MenuButton> createState() => _MenuButtonState();
@@ -45,7 +57,7 @@ class _MenuButtonState extends State<MenuButton> {
     final renderBox = context.findRenderObject() as RenderBox;
     final size = renderBox.size;
     final offset = renderBox.localToGlobal(Offset.zero);
-
+    var finalSize = size.width < widget.minmumSize.width ? widget.minmumSize.width : size.width;
     entry = OverlayEntry(
         builder: (context) => Consumer<AppThemeData>(
           builder: (context, appThemeData, child) => Stack(
@@ -59,9 +71,9 @@ class _MenuButtonState extends State<MenuButton> {
                 },
               ),
               Positioned(
-                  left: offset.dx - (size.width + (widget.iconSize * .5)) - widget.menuWidth * .5 ,
+                  left: offset.dx - ((finalSize + widget.menuWidth) - size.width).abs(),
                   top: offset.dy + size.height,
-                  width: widget.menuWidth,
+                  width: finalSize + widget.menuWidth,
                   child: buildOverly(sizeConfig, appThemeData)
               ),
             ],

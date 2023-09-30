@@ -22,7 +22,7 @@ class ThemePickerScreen extends StatelessWidget {
       create: (context) => EditThemes(),
       child: Consumer2<AppThemeData, EditThemes>(
         builder: (context, appThemeData, editThemes, child) {
-          var topBarSize = 24 * sizeConfig.safeBlockSmallest;
+          var topBarSize = 24 * sizeConfig.textScaleFactor;
           return Container(
             color: appThemeData.selectedTheme.primaryLightColor,
             child: SafeArea(
@@ -101,7 +101,7 @@ class ThemePickerScreen extends StatelessWidget {
                           child: Icon(
                             Icons.add,
                             color: appThemeData.selectedTheme.textColor,
-                            size: 30 * sizeConfig.blockSmallest,
+                            size: 30 * sizeConfig.textScaleFactor,
                           )
                         ),
                       ),
@@ -150,7 +150,7 @@ class ThemePickerScreen extends StatelessWidget {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: theme.textColor,
-                  fontSize: 12 * sizeConfig.blockSmallest
+                  fontSize: 12 * sizeConfig.textScaleFactor
                 ),
                 textAlign: TextAlign.center,
                 )
@@ -181,7 +181,7 @@ class ThemePickerScreen extends StatelessWidget {
           child: Icon(
             FontAwesomeIcons.circleXmark,
             color: theme.secondaryColor,
-            size: 18 * sizeConfig.safeBlockSmallest,
+            size: 18 * sizeConfig.textScaleFactor,
           )
         ),
       ),
@@ -198,7 +198,7 @@ class ThemePickerScreen extends StatelessWidget {
           child: Icon(
             Icons.brightness_1,
             color: appThemeData.selectedTheme.secondaryColor,
-            size: 18 * sizeConfig.blockSmallest,
+            size: 16 * sizeConfig.textScaleFactor,
           ),
         ));
   }

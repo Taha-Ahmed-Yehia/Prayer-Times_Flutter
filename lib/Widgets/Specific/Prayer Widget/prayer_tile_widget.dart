@@ -14,8 +14,8 @@ class PrayerTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var sizeConfig = SizeConfig.instanse;
-    var iconSize = 18 * sizeConfig.blockSmallest;
-    var fontSize =  18 * sizeConfig.blockSmallest;
+    var iconSize = 18 * sizeConfig.textScaleFactor;
+    var fontSize =  18 * sizeConfig.textScaleFactor;
     return Consumer<AppThemeData>(
       builder: (context, appThemeData, child) => Container(
         width: sizeConfig.screenWidth * .9,

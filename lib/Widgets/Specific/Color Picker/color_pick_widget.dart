@@ -72,7 +72,7 @@ class _ColorPickState extends State<ColorPick> {
       children: [
         Text(widget.title, style: TextStyle(
             color: widget.theme.textColor,
-            fontSize: widget.fontSize * sizeConfig.safeBlockSmallest
+            fontSize: widget.fontSize * sizeConfig.textScaleFactor
         ),),
         Container(
           padding: EdgeInsetsDirectional.all(1 * sizeConfig.safeBlockSmallest),
@@ -152,7 +152,7 @@ class _ColorPickState extends State<ColorPick> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Text("Color Picker", style: TextStyle(color: appThemeData.selectedTheme.textColor, fontSize: widget.fontSize * 2 * sizeConfig.safeBlockSmallest),),
+                    Text("Color Picker", style: TextStyle(color: appThemeData.selectedTheme.textColor, fontSize: widget.fontSize * 2 * sizeConfig.textScaleFactor),),
                     SizedBox(height: 10 * sizeConfig.safeBlockSmallest,),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -169,7 +169,7 @@ class _ColorPickState extends State<ColorPick> {
                       children: [
                         Row(
                           children: [
-                            Text("Color:", style: TextStyle(color: appThemeData.selectedTheme.textColor, fontSize: widget.fontSize * sizeConfig.safeBlockSmallest)),
+                            Text("Color:", style: TextStyle(color: appThemeData.selectedTheme.textColor, fontSize: widget.fontSize * sizeConfig.textScaleFactor)),
                             SizedBox(width: 10 * sizeConfig.safeBlockSmallest,),
                             Container(
                               padding: EdgeInsetsDirectional.all(2 * sizeConfig.safeBlockSmallest),

@@ -19,12 +19,17 @@ class NextPrayerWidget extends StatelessWidget {
       create: (context) => CurrentTime(),
       child: Consumer3<AppThemeData, PrayerTimesData, CurrentTime>(
         builder: (context, appThemeData, prayerTimesDate, currentTime, child) {
-
+          
           if(!prayerTimesDate.isLoaded) {
-            return CircularProgressIndicator(
-              color: appThemeData.selectedTheme.secondaryColor,
+            return SizedBox(
+              width: sizeConfig.blockSmallest * 100,
+              height: sizeConfig.blockSmallest * 100,
+              child: CircularProgressIndicator(
+                color: appThemeData.selectedTheme.secondaryColor,
+              ),
             );
-          }else{
+          }
+          else{
             var currentPrayer = prayerTimesDate.getCurrentPrayer();
             var nextPrayer = prayerTimesDate.getNextPrayer();
             var time = currentTime.date;
@@ -53,7 +58,7 @@ class NextPrayerWidget extends StatelessWidget {
                         nextPrayer.prayerName,
                         style: TextStyle(
                           color: appThemeData.selectedTheme.textColor, 
-                          fontSize: 18 * sizeConfig.blockSmallest
+                          fontSize: 18 * sizeConfig.textScaleFactor
                         ), 
                         textAlign: TextAlign.center,
                       ),
@@ -62,7 +67,7 @@ class NextPrayerWidget extends StatelessWidget {
                         DateFormat(
                           DateFormat.HOUR_MINUTE).format(nextPrayer.prayerTime), 
                           style: TextStyle(color: appThemeData.selectedTheme.secondaryColor,
-                          fontSize: 24 * sizeConfig.blockSmallest
+                          fontSize: 24 * sizeConfig.textScaleFactor
                         ), 
                         textAlign: TextAlign.center
                       ),
@@ -71,7 +76,7 @@ class NextPrayerWidget extends StatelessWidget {
                         (duration - timeDur).toString().split('.').first.padLeft(8, "0"), 
                         style: TextStyle(
                           color: appThemeData.selectedTheme.textColor.withAlpha(128),
-                          fontSize: 18 * sizeConfig.blockSmallest
+                          fontSize: 18 * sizeConfig.textScaleFactor
                         ), 
                         textAlign: TextAlign.center,
                       ),

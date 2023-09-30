@@ -79,7 +79,7 @@ class CreateOrEditTheme extends StatelessWidget {
                         ),
                         child: Text(
                             editing ? "Done" : "Add",
-                            style: TextStyle(color: appThemeData.selectedTheme.textColor, fontSize: 24 * sizeConfig.safeBlockSmallest)
+                            style: TextStyle(color: appThemeData.selectedTheme.textColor, fontSize: 24 * sizeConfig.textScaleFactor)
                         ),
                       ),
                     ),
@@ -97,11 +97,11 @@ class CreateOrEditTheme extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        BackToPrevScreenButton(appThemeData.selectedTheme.textColor, buttonSize: 30 * sizeConfig.safeBlockSmallest),
+        BackToPrevScreenButton(appThemeData.selectedTheme.textColor, buttonSize: 30 * sizeConfig.textScaleFactor),
         Text(
             editing ? "Edit Theme" : "Create Theme",
             textAlign: TextAlign.center,
-            style: TextStyle(color: appThemeData.selectedTheme.textColor, fontSize: 30 * sizeConfig.safeBlockSmallest, fontWeight: FontWeight.bold,
+            style: TextStyle(color: appThemeData.selectedTheme.textColor, fontSize: 30 * sizeConfig.textScaleFactor, fontWeight: FontWeight.bold,
                 shadows: [
                   Shadow(
                       blurRadius: 2,

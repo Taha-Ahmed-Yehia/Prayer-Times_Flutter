@@ -24,8 +24,8 @@ class SettingsScreen extends StatelessWidget {
 
     return Consumer2<AppThemeData, PrayerTimesData>(
       builder: (context, appThemeData, prayerTimesData, child) {
-        var topBarSize = 24 * sizeConfig.blockSmallest;
-        var fontSize = 12 * sizeConfig.blockSmallest;
+        var topBarSize = 24 * sizeConfig.textScaleFactor;
+        var fontSize = 12 * sizeConfig.textScaleFactor;
         return Container(
           color: appThemeData.selectedTheme.primaryColor,
           child: SafeArea(
@@ -41,9 +41,9 @@ class SettingsScreen extends StatelessWidget {
                       Column(
                         children: [
                           divider(appThemeData, sizeConfig.blockSmallest),
-                          prayersCalculationMethod(appThemeData, fontSize, prayerTimesData),
+                          prayersCalculationMethod(appThemeData, fontSize, prayerTimesData, sizeConfig),
                           divider(appThemeData, sizeConfig.blockSmallest),
-                          prayersMadhab(appThemeData, fontSize, prayerTimesData),
+                          prayersMadhab(appThemeData, fontSize, prayerTimesData, sizeConfig),
                           divider(appThemeData, sizeConfig.blockSmallest),
                         ],
                       ),
@@ -136,7 +136,7 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget prayersMadhab(AppThemeData appThemeData, double fontSize, PrayerTimesData prayerTimesData) {
+  Widget prayersMadhab(AppThemeData appThemeData, double fontSize, PrayerTimesData prayerTimesData, SizeConfig sizeConfig) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -149,10 +149,12 @@ class SettingsScreen extends StatelessWidget {
           ),
           textAlign: TextAlign.center,
         ),
-        CustomDropDown([
-          CustomDropDownItem(Madhab.Hanafi.capitalize(), (){prayerTimesData.setCalculationMethodMadhab(Madhab.Hanafi);}),
-          CustomDropDownItem(Madhab.Shafi.capitalize(), (){prayerTimesData.setCalculationMethodMadhab(Madhab.Shafi);})
-        ],
+        CustomDropDown(
+          minmumSize: const Size(100, 50) * sizeConfig.blockSmallest,
+          [
+            CustomDropDownItem(Madhab.Hanafi.capitalize(), (){prayerTimesData.setCalculationMethodMadhab(Madhab.Hanafi);}),
+            CustomDropDownItem(Madhab.Shafi.capitalize(), (){prayerTimesData.setCalculationMethodMadhab(Madhab.Shafi);})
+          ],
           selectedItemID: prayerTimesData.prayerTimesModel.calculationMethodData.calculationParameters.madhab == Madhab.Hanafi ? 0 : 1,
         )
       ],
@@ -250,7 +252,7 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 
-  Widget prayersCalculationMethod(AppThemeData appThemeData, double fontSize, PrayerTimesData prayerTimesData) {
+  Widget prayersCalculationMethod(AppThemeData appThemeData, double fontSize, PrayerTimesData prayerTimesData, SizeConfig sizeConfig) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -264,6 +266,7 @@ class SettingsScreen extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         CustomDropDown(
+          minmumSize: const Size(200, 50) * sizeConfig.blockSmallest,
           CalculationMethodType.values.map((e) {
             return CustomDropDownItem(e.name.enumNameToString(), (){prayerTimesData.setCalculationMethodData(e);});
           }).toList(),

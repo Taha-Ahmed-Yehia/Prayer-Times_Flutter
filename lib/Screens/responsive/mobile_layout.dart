@@ -32,7 +32,7 @@ class MobileLayout extends StatelessWidget {
                 topPanel(sizeConfig, appThemeData.selectedTheme, context),
                 SizedBox(height: 10 * sizeConfig.blockSizeVertical,),
                 //bottom panel that show all prayers times
-                bottomPanel(sizeConfig),
+                bottomPanel(sizeConfig, appThemeData.selectedTheme),
               ]
           )
       ),
@@ -67,6 +67,7 @@ class MobileLayout extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TimeWidget(sizeConfig: sizeConfig,),
+
               Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -83,7 +84,7 @@ class MobileLayout extends StatelessWidget {
     );
   }
 
-  Widget bottomPanel(SizeConfig sizeConfig,){
+  Widget bottomPanel(SizeConfig sizeConfig, AppTheme theme){
     return Consumer<PrayerTimesData>(
       builder: (context, prayerTimesData, child) { 
         bool isPrayerDataLoaded = prayerTimesData.isLoaded;
@@ -91,7 +92,17 @@ class MobileLayout extends StatelessWidget {
           print("Prayer Initialized: $isPrayerDataLoaded");
         }
         if(!isPrayerDataLoaded) {
-          return const SizedBox();
+          return Expanded(
+            child: Center(
+              child: SizedBox(
+                width: sizeConfig.blockSmallest * 100,
+                height: sizeConfig.blockSmallest * 100,
+                child: CircularProgressIndicator(
+                  color: theme.secondaryColor,
+                ),
+              ),
+            ),
+          );
         }
         return Expanded(
           child: Column(
@@ -103,11 +114,31 @@ class MobileLayout extends StatelessWidget {
                 prayerName: isPrayerDataLoaded?prayerTimesData.fajrTime.prayerName:"",
                 prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.fajrTime.prayerTime):""
               ),
-              PrayerTile(prayerIcon: CupertinoIcons.sunrise,prayerName: isPrayerDataLoaded?prayerTimesData.sunriseTime.prayerName:"", prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.sunriseTime.prayerTime):""),
-              PrayerTile(prayerIcon: CupertinoIcons.sun_max, prayerName: isPrayerDataLoaded?prayerTimesData.dhuhrTime.prayerName:"", prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.dhuhrTime.prayerTime):""),
-              PrayerTile(prayerIcon: CupertinoIcons.sun_haze, prayerName: isPrayerDataLoaded?prayerTimesData.asrTime.prayerName:"", prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.asrTime.prayerTime):""),
-              PrayerTile(prayerIcon: CupertinoIcons.sunset,prayerName: isPrayerDataLoaded?prayerTimesData.maghribTime.prayerName:"", prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.maghribTime.prayerTime):""),
-              PrayerTile(prayerIcon: CupertinoIcons.moon_stars,prayerName: isPrayerDataLoaded?prayerTimesData.ishaTime.prayerName:"", prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.ishaTime.prayerTime):""),
+              PrayerTile(
+                prayerIcon: CupertinoIcons.sunrise,
+                prayerName: isPrayerDataLoaded?prayerTimesData.sunriseTime.prayerName:"", 
+                prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.sunriseTime.prayerTime):""
+              ),
+              PrayerTile(
+                prayerIcon: CupertinoIcons.sun_max,
+                prayerName: isPrayerDataLoaded?prayerTimesData.dhuhrTime.prayerName:"", 
+                prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.dhuhrTime.prayerTime):""
+              ),
+              PrayerTile(
+                prayerIcon: CupertinoIcons.sun_haze, 
+                prayerName: isPrayerDataLoaded?prayerTimesData.asrTime.prayerName:"", 
+                prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.asrTime.prayerTime):""
+              ),
+              PrayerTile(
+                prayerIcon: CupertinoIcons.sunset,
+                prayerName: isPrayerDataLoaded?prayerTimesData.maghribTime.prayerName:"", 
+                prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.maghribTime.prayerTime):""
+              ),
+              PrayerTile(
+                prayerIcon: CupertinoIcons.moon_stars,
+                prayerName: isPrayerDataLoaded?prayerTimesData.ishaTime.prayerName:"", 
+                prayerTime: isPrayerDataLoaded? DateFormat(DateFormat.HOUR_MINUTE).format(prayerTimesData.ishaTime.prayerTime):""
+              ),
             ],
           ),
         );

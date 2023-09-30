@@ -34,7 +34,7 @@ class MenuButtonWidget extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context) => const ThemePickerScreen(),));
             }),
           ], 
-          iconSize: 18,
+          iconSize: 24 * sizeConfig.textScaleFactor,
           icon: FontAwesomeIcons.bars,
         )
       ),

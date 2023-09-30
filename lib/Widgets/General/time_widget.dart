@@ -16,12 +16,13 @@ class TimeWidget extends StatelessWidget{
     var timeHijri = HijriCalendar.now();
 
     SizeConfig sizeConfig = SizeConfig.instanse;
-
-    var bigFontSize = 12 * sizeConfig.blockSmallest;
-    var smallFontSize = 8 * sizeConfig.blockSmallest;
+    
+    var bigFontSize = 12 * sizeConfig.textScaleFactor;
+    var smallFontSize = 8 * sizeConfig.textScaleFactor;
     var circleWidth = 50 * sizeConfig.blockSmallest;
     return Consumer<AppThemeData>(
-      builder: (context, appThemeData, child) => Column(
+      builder: (context, appThemeData, child) {
+        return Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -93,7 +94,8 @@ class TimeWidget extends StatelessWidget{
             ),
           ),
         ],
-      ),
+      );
+      },
     );
   }
 }

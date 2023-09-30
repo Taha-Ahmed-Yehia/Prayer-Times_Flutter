@@ -67,7 +67,6 @@ class _BirdsAnimationState extends State<BirdsAnimation> with TickerProviderStat
 
     controller4.repeat(min: 0, max: 9, period: const Duration(milliseconds: 1000));
 
-
     super.initState();
     
     _controller = AnimationController(vsync: this, duration: const Duration(seconds: 20));
@@ -84,84 +83,86 @@ class _BirdsAnimationState extends State<BirdsAnimation> with TickerProviderStat
     const colorAlpha = 64;
     
     return Consumer<AppThemeData>(
-      builder: (context, appThemeData, child) => SizedBox(
-        width: widget.width,
-        height: widget.height,
-        child: Stack(
-          alignment: Alignment.centerLeft,
-          children: [
-            SizedBox(
-              width: widget.width,
-              child: SlideTransition(
-                position: _animation,
-                child: GifImage(
-                    controller: controller1,
-                    image: imageAsset,
-                    color: appThemeData.selectedTheme.textDarkColor.withAlpha(colorAlpha),
-                    fit: BoxFit.contain,
-                    width: 10 * sizeConfig.blockSmallest,
-                    height: 10 * sizeConfig.blockSmallest,
-                  )
-              ),
-            ),
-
-            Positioned(
-              left: -10 * sizeConfig.blockSizeHorizontal,
-              top: 95 * sizeConfig.blockSizeVertical,
-              child: SizedBox(
+      builder: (context, appThemeData, child) {
+        return SizedBox(
+          width: widget.width,
+          height: widget.height,
+          child: Stack(
+            alignment: Alignment.centerLeft,
+            children: [
+              SizedBox(
                 width: widget.width,
                 child: SlideTransition(
                   position: _animation,
                   child: GifImage(
-                    controller: controller2,
-                    image: imageAsset,
-                    color: appThemeData.selectedTheme.textDarkColor.withAlpha(colorAlpha),
-                    fit: BoxFit.contain,
-                    width: 10 * sizeConfig.blockSmallest,
-                    height: 10 * sizeConfig.blockSmallest,
-                  )
+                      controller: controller1,
+                      image: imageAsset,
+                      color: appThemeData.selectedTheme.textDarkColor.withAlpha(colorAlpha),
+                      fit: BoxFit.contain,
+                      width: 10 * sizeConfig.blockSmallest,
+                      height: 10 * sizeConfig.blockSmallest,
+                    )
                 ),
               ),
-            ),
-            Positioned(
-              left: -30 * sizeConfig.blockSizeHorizontal,
-              top: 100 * sizeConfig.blockSizeVertical,
-              child: SizedBox(
-                width: widget.width,
-                child: SlideTransition(
-                  position: _animation,
-                  child: GifImage(
-                    controller: controller3,
-                    image: imageAsset,
-                    color: appThemeData.selectedTheme.textDarkColor.withAlpha(colorAlpha),
-                    fit: BoxFit.contain,
-                    width: 8 * sizeConfig.blockSmallest,
-                    height: 8 * sizeConfig.blockSmallest,
-                  )
+        
+              Positioned(
+                left: -10 * sizeConfig.blockSizeHorizontal,
+                top: 95 * sizeConfig.blockSizeVertical,
+                child: SizedBox(
+                  width: widget.width,
+                  child: SlideTransition(
+                    position: _animation,
+                    child: GifImage(
+                      controller: controller2,
+                      image: imageAsset,
+                      color: appThemeData.selectedTheme.textDarkColor.withAlpha(colorAlpha),
+                      fit: BoxFit.contain,
+                      width: 10 * sizeConfig.blockSmallest,
+                      height: 10 * sizeConfig.blockSmallest,
+                    )
+                  ),
                 ),
               ),
-            ),
-            Positioned(
-              left: -35 * sizeConfig.blockSizeHorizontal,
-              top: 115 * sizeConfig.blockSizeVertical,
-              child: SizedBox(
-                width: widget.width,
-                child: SlideTransition(
-                  position: _animation,
-                  child: GifImage(
-                    controller: controller4,
-                    image: imageAsset,
-                    color: appThemeData.selectedTheme.textDarkColor.withAlpha(colorAlpha),
-                    fit: BoxFit.contain,
-                    width: 15 * sizeConfig.blockSmallest,
-                    height: 15 * sizeConfig.blockSmallest,
-                  )
+              Positioned(
+                left: -30 * sizeConfig.blockSizeHorizontal,
+                top: 100 * sizeConfig.blockSizeVertical,
+                child: SizedBox(
+                  width: widget.width,
+                  child: SlideTransition(
+                    position: _animation,
+                    child: GifImage(
+                      controller: controller3,
+                      image: imageAsset,
+                      color: appThemeData.selectedTheme.textDarkColor.withAlpha(colorAlpha),
+                      fit: BoxFit.contain,
+                      width: 8 * sizeConfig.blockSmallest,
+                      height: 8 * sizeConfig.blockSmallest,
+                    )
+                  ),
                 ),
               ),
-            ),
-          ],
-        ),
-      ),
+              Positioned(
+                left: -35 * sizeConfig.blockSizeHorizontal,
+                top: 115 * sizeConfig.blockSizeVertical,
+                child: SizedBox(
+                  width: widget.width,
+                  child: SlideTransition(
+                    position: _animation,
+                    child: GifImage(
+                      controller: controller4,
+                      image: imageAsset,
+                      color: appThemeData.selectedTheme.textDarkColor.withAlpha(colorAlpha),
+                      fit: BoxFit.contain,
+                      width: 15 * sizeConfig.blockSmallest,
+                      height: 15 * sizeConfig.blockSmallest,
+                    )
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

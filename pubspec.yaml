@@ -56,7 +56,8 @@ dependencies:
   # animation
   flutter_gif: ^0.0.4
 
-
+  # devolope mode
+  device_preview: ^1.1.0
 
 dev_dependencies:
   flutter_test:

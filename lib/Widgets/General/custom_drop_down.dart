@@ -12,7 +12,8 @@ class CustomDropDown extends StatefulWidget {
   final int selectedItemID;
   final List<CustomDropDownItem> dropDownItems;
   final double fontSize;
-  const CustomDropDown(this.dropDownItems, {this.onSelect, this.selectedItemID = 0, this.fontSize = 12, Key? key}) : super(key: key);
+  final Size minmumSize;
+  const CustomDropDown(this.dropDownItems, {this.onSelect, this.selectedItemID = 0, this.fontSize = 12, Key? key, this.minmumSize = const Size(0, 0)}) : super(key: key);
 
   @override
   State<CustomDropDown> createState() => _CustomDropDownState();
@@ -68,7 +69,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                   widget.dropDownItems[selectedItemID].title,
                   style: TextStyle(
                     color: appThemeData.selectedTheme.textColor, 
-                    fontSize: widget.fontSize * sizeConfig.blockSmallest
+                    fontSize: widget.fontSize * sizeConfig.textScaleFactor
                   ),
                 ),
                 SizedBox(width: 10 * sizeConfig.blockSmallest,),
@@ -91,6 +92,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
     final offset = renderBox.localToGlobal(Offset.zero);
     final itemCount = widget.dropDownItems.length;
     final containerheight =  offset.dy * (itemCount > 2 ? itemCount.toDouble() * .13 : 0.625) ;
+    var finalSize = size.width < widget.minmumSize.width ? widget.minmumSize.width : size.width;
     entry = OverlayEntry(
       builder: (context) => Consumer<AppThemeData>(
         builder: (context, appThemeData, child) => Stack(
@@ -104,9 +106,9 @@ class _CustomDropDownState extends State<CustomDropDown> {
               },
             ),
             Positioned(
-              left: offset.dx,
+              left: offset.dx - (finalSize - size.width).abs(),
               top: offset.dy + size.height,
-              width: size.width,
+              width: finalSize,
               height: containerheight,
               child: buildOverly(sizeConfig, appThemeData)
             ),

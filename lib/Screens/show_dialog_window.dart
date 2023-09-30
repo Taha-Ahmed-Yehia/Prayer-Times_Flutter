@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 
 void showCustomDialog(String title, String message){
   var context = mainNavigatorKey.currentContext!;
-  var blockSmallest = SizeConfig.instanse.blockSmallest;
   showDialog(context: context,
       builder: (context) => Consumer<AppThemeData>(
         builder: (context, appThemeData, child) => AlertDialog(
@@ -17,7 +16,7 @@ void showCustomDialog(String title, String message){
               title,
               style: TextStyle(
                   color: appThemeData.selectedTheme.textColor,
-                  fontSize: 32 * blockSmallest,
+                  fontSize: 32 * SizeConfig.instanse.textScaleFactor,
                   fontWeight: FontWeight.bold
               ),
             ),

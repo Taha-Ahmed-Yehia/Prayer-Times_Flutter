@@ -36,14 +36,14 @@ class CustomTextField extends StatelessWidget {
         cursorColor: appThemeData.selectedTheme.primaryDarkColor,
         style: TextStyle(
             color: appThemeData.selectedTheme.textDarkColor,
-            fontSize: fontSize * sizeConfig.blockSmallest
+            fontSize: fontSize * sizeConfig.textScaleFactor
         ),
         decoration: InputDecoration(
             border: InputBorder.none,
             hintText: hintText,
             hintStyle: TextStyle(
                 color: appThemeData.selectedTheme.textDarkColor.withAlpha(175),
-                fontSize: fontSize * sizeConfig.blockSmallest
+                fontSize: fontSize * sizeConfig.textScaleFactor
             )
         ),
         onChanged: onChanged ?? (value){},
@@ -59,14 +59,14 @@ class CustomTextField extends StatelessWidget {
         cursorColor: appThemeData.selectedTheme.primaryDarkColor,
         style: TextStyle(
             color: appThemeData.selectedTheme.textDarkColor,
-            fontSize: fontSize * sizeConfig.blockSmallest
+            fontSize: fontSize * sizeConfig.textScaleFactor
         ),
         decoration: InputDecoration(
             border: InputBorder.none,
             hintText: hintText,
             hintStyle: TextStyle(
                 color: appThemeData.selectedTheme.textDarkColor.withAlpha(175),
-                fontSize: fontSize * sizeConfig.blockSmallest
+                fontSize: fontSize * sizeConfig.textScaleFactor
             )
         ),
         onChanged: onChanged ?? (value){},

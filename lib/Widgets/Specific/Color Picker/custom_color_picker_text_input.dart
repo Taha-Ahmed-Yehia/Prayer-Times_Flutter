@@ -26,7 +26,7 @@ class CustomColorPickTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig sizeConfig = SizeConfig.instanse;
-    TextStyle textStyle = TextStyle(color: theme.textColor, fontSize: fontSize * sizeConfig.safeBlockSmallest);
+    TextStyle textStyle = TextStyle(color: theme.textColor, fontSize: fontSize * sizeConfig.textScaleFactor);
     return ChangeNotifierProvider(
       create: (context) => CustomColorPickerTextInputValue(),
       child: Consumer<CustomColorPickerTextInputValue>(
@@ -66,7 +66,7 @@ class CustomColorPickTextField extends StatelessWidget {
   }
 
   Widget _textField(CustomColorPickerTextInputValue selected, SizeConfig sizeConfig) {
-    TextStyle textStyle = TextStyle(color: theme.textColor, fontSize: fontSize * sizeConfig.safeBlockSmallest);
+    TextStyle textStyle = TextStyle(color: theme.textColor, fontSize: fontSize * sizeConfig.textScaleFactor);
     Widget widget = Text(text, style:  textStyle, textAlign: TextAlign.center,);
     //print("isSelected: ${selected.isSelected}, isEditing: ${selected.isEditing}");
     if(selected.isEditing){

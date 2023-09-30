@@ -59,7 +59,7 @@ class AppThemeData extends ChangeNotifier{
       primaryColor:"666666".toColor(),
       primaryLightColor:"999999".toColor(),
       primaryDarkColor:"333333".toColor(),
-      secondaryColor:"999999".toColor(),
+      secondaryColor:"ffd3d3d3".toColor(),
       textColor:Colors.white,
       textDarkColor:Colors.black,
       isDefault: true
